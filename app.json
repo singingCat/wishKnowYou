@@ -1,0 +1,12 @@
+{
+  "pages":[
+    "pages/tests/tests",
+    "pages/test/test"
+  ],
+  "window":{
+    "navigationBarTextStyle": "light",
+    "navigationBarTitleText": "微愿懂你",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light"
+  }
+}

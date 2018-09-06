@@ -1,0 +1,123 @@
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: #f1f1f1;
+  overflow: hidden;
+}
+.group-contrast {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 250rpx;
+  background-color: rgba(0, 0, 0, .8);
+  text-align: center;
+}
+.group-rankings-wrap {
+  overflow: hidden;
+  color: #fff;
+}
+.group-rankings {
+  float: left;
+  font-size: 33.33312rpx;
+  margin-left: 29.16648rpx;
+  margin-top: 35.6664rpx;
+}
+.group-rankings-detail {
+  float: left;
+  font-size: 24.99984rpx;
+  margin-left: 10.4166rpx;
+  margin-top: 41.6rpx;
+}
+.scroll-box {
+  position: relative;
+  padding-right: 29.16648rpx;
+  overflow: hidden;
+  width: 100%;
+  height: 120rpx;
+  box-sizing: border-box;
+  white-space: nowrap;
+  margin-top: 20.722rpx;
+}
+.user-ranking-group {
+  width: auto;
+  height: 100%;
+  color: #fff;
+}
+.user-ranking {
+  width: 76.3884rpx;
+  display: inline-block;
+  margin-right: 20.8332rpx;
+  font-size: 0;
+}
+.user-ranking:first-child {
+  padding-left: 29.16648rpx;
+}
+.user-image {
+  width: 76.3884rpx;
+  height: 76.3884rpx;
+  border-radius: 50%;
+}
+.ranking-fraction {
+  font-size: 24.99984rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 7rpx;
+}
+.scroll-more {
+  position: absolute;
+  right: 0;
+  top: 26rpx;
+  height: 30rpx;
+  width: 30rpx;
+}
+.group-contrast.no-group {
+  height: 170rpx;
+  padding-top: 80rpx;
+}
+.group-logo {
+  height: 100rpx;
+  width: 100rpx;
+  vertical-align: middle;
+  margin-right: 20.83rpx;
+}
+.group-tip {
+  vertical-align: middle;
+  color: #fff;
+  font-size: 33.33rpx;
+  font-weight: bold;
+}
+.waiting {
+  position:fixed; 
+  left: 50%; 
+  top: 50%;
+  width: 150rpx;
+  height: 150rpx;
+  margin-left: -75rpx;
+  margin-top: -75rpx;
+  z-index:4;
+}
+.custom-toast {
+  position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	min-width: 300rpx;
+	border-radius: 5px;
+	text-align: center;
+	z-index: 3;
+	color: #fff;
+	font-size: 25rpx;
+	padding: 0 20rpx 30rpx 20rpx;
+  background-color: #595959;
+}
+.custom-toast-image {
+  display: block;
+  width: 60rpx;
+  height: 60rpx;
+  margin: 35rpx auto;
+}

@@ -1,0 +1,16 @@
+<view class='container' style='height: auto'>
+  <view class='test-list-wrap'>
+    <view class='test-list' wx:for='{{testGroup}}' wx:key='testList' bindtap='startTest' data-uuid='{{item.uuid}}'>
+      <image src='{{item.coverHeadImageUrl}}' class='test-icon'></image>
+      <view class='test-wrap'>
+        <view class='test-name'>{{item.name}}</view>
+        <view class='test-number'>{{item.completedUserNumber}}人完成测试</view>
+      </view>
+      <image src='http://cdn.imalljoy.com/test/common/more_grey.png' class='test-detail' mode="widthFix"></image>
+      <view class='start-test'>
+        <text wx:if='{{item.notVote}}' class='not-vote'>开始测试</text>
+        <text wx:else>已经完成</text>
+      </view>
+    </view>
+  </view>
+</view>

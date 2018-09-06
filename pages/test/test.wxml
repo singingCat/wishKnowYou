@@ -1,0 +1,162 @@
+<view class='container'>
+  <swiper autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' vertical='{{vertical}}' current='{{toIndex}}' bindchange='onSlideChangeEnd' class='section'>
+    <!--封面页-->
+    <swiper-item wx:if='{{coverShow}}'>
+      <image src='../images/wait.gif' class='cover-wait'></image>
+      <image src='{{coverBackgroundImageUrl}}' class='cover-background'></image>
+      <image src='{{coverHeadImageUrl}}' class='top-image'></image>
+      <view class='participation'>
+        <image src='{{coverAttendButtonImageUrl}}'></image>
+        <view class='participation-word'>已有{{completedUserNumber}}人参与测试</view>
+      </view>
+      <view class='start-answer'>
+        <image src='{{startButton}}' bindtap='startAnswer'></image>
+      </view>
+      <view class='group-contrast no-group' wx:if="{{showNoGroupContrast}}">
+        <image src='../images/group.png' class='group-logo'></image>
+        <text class='group-tip'>分享到群里可查看群排行</text>
+      </view>
+      <view class='group-contrast' wx:if="{{showGroupContrast}}">
+        <view class='group-rankings-wrap'>
+          <view class='group-rankings'>群排行</view>
+          <view class='group-rankings-detail'>{{rankString}}</view>
+        </view>
+        <view class='scroll-box'>
+          <scroll-view scroll-x class='user-ranking-group' scroll-with-animation='true' scroll-left='{{scrollLeft}}'>
+            <view wx:for='{{userGroup}}' wx:key='_this' class='user-ranking' bindtap='checkFriend' data-item='{{item}}' scroll-x>
+            <image src='{{item.headImageUrl}}' class='user-image'></image>
+            <view class='ranking-fraction'>{{item.fraction}}分</view>
+          </view>
+        </scroll-view>
+        <image src='http://cdn.imalljoy.com/test/common/more.png' class='scroll-more' bindtap='scrollLeft'></image>
+      </view>
+    </view>
+    </swiper-item>
+    <!--别人结果页-->
+    <swiper-item wx:if='{{otherResultShow}}'>
+      <image src='{{resultBackgroundImageUrl}}' class='result-background'></image>
+      <view class='result-box' style='background-image: url("http://cdn.imalljoy.com/test/common/result_tip_background.png");'>
+      <image src='http://cdn.imalljoy.com/test/common/result_tip_background_adorn.png' class='background-adron' mode='widthFix'></image>
+  <view class='head-frame' style='background-image: url("http://cdn.imalljoy.com/test/common/head_frame.png");'>
+    <image src='{{friendUser.headImage}}'></image>
+  </view>
+  <view class='head-portrait'>{{friendUser.name}}</view>
+  <view class='center-words' style='background-color: {{resultTipBackgroundColor}}'>{{resultTip}}</view>
+  <view class='fraction-frame' style='background-image: url("http://cdn.imalljoy.com/test/common/fraction_frame.png");'>
+    <view class='fraction'>{{friendUser.score}}</view>分
+  </view>
+  <view class='test-description'>{{friendUser.introduction}}</view>
+</view>
+  <button class='small-button generate-card' style='background-image: url("http://cdn.imalljoy.com/test/common/small_button.png")' open-type="share">分享测试</button>
+  <button class='big-button' style='background-image: url("http://cdn.imalljoy.com/test/common/big_button.png")' bindtap='startAnswer'>开始测试</button>
+  <button class='small-button continue' style='background-image: url("http://cdn.imalljoy.com/test/common/small_button.png")' bindtap='continueTest'>更多测试</button>
+  <view class='group-contrast no-group' wx:if="{{showNoGroupContrast}}">
+    <image src='../images/group.png' class='group-logo'></image>
+    <text class='group-tip'>完成后分享到群里可查看群排行</text>
+  </view>
+  <view class='group-contrast' wx:if='{{showGroupContrast}}'>
+    <view class='group-rankings-wrap'>
+      <view class='group-rankings'>群排行</view>
+      <view class='group-rankings-detail'>{{friendUser.rankString}}</view>
+    </view>
+    <view class='scroll-box'>
+      <scroll-view scroll-x class='user-ranking-group' scroll-with-animation='true' scroll-left='{{scrollLeft}}'>
+        <view wx:for='{{userGroup}}' wx:key='users' class='user-ranking' bindtap='checkFriend' data-item='{{item}}' scroll-x>
+          <image src='{{item.headImageUrl}}' class='user-image'></image>
+          <view class='ranking-fraction'>{{item.fraction}}分</view>
+        </view>
+      </scroll-view>
+      <image src='http://cdn.imalljoy.com/test/common/more.png' class='scroll-more' bindtap='scrollLeft'></image>
+    </view>
+  </view>
+    </swiper-item>
+    <!-- 投票板块 -->
+    <block wx:for='{{voteItems}}' wx:key='_voteItem'>
+      <swiper-item>
+        <view class='item-wrap'>
+          <view wx:if='{{item.feedType == 1}}' class='vote-title'>
+            <view class='vote-title-inner'>{{item.leftTitle}}</view>
+            <view class='vote-title-inner'>{{item.rightTitle}}</view>
+          </view>
+          <view wx:if='{{item.feedType == 2}}' class='vote-title'>{{item.title}}</view>
+          <view class='vote-area'>
+            <view class='item-mask' bindtap='alreadyVoted' wx:if="{{item.voted}}"></view>
+            <image wx:if='{{item.feedType == 1}}' src='{{item.leftImageUrl}}' class='inner-image'></image>
+            <view class='left-wrap' bindtap='voteLeft' data-index='{{index}}'>
+              <image wx:if='{{item.feedType == 2}}' src='{{item.leftImageUrl}}' class='inner-image'></image>
+              <view class='image-wrap'>
+                <block wx:for='{{item.leftUserList}}' wx:key='leftList'>
+                  <image src='{{item.imageUrl}}'></image>
+                </block>
+              </view>
+            </view>
+            <view class='right-wrap' bindtap='voteRight' data-index='{{index}}'>
+              <image wx:if='{{item.feedType == 2}}' src='{{item.rightImageUrl}}' class='inner-image'></image>
+              <view class='image-wrap'>
+                <block wx:for='{{item.rightUserList}}' wx:key='rightList'>
+                  <image src='{{item.imageUrl}}'></image>
+                </block>
+              </view>
+            </view>
+          </view>
+          <view class='page-number'>{{index+1}}/{{total}}</view>
+          <view class='vote-number'>已有{{completedUserNumber}}人参与</view>
+          <view class='bottom-title'>{{testName}}</view>
+        </view>
+      </swiper-item>
+    </block>
+    <!--个人结果页-->
+    <swiper-item wx:if='{{personalResultShow}}'>
+      <image src='{{resultBackgroundImageUrl}}' class='result-background'></image>
+      <view class='result-box' style='background-image: url("http://cdn.imalljoy.com/test/common/result_tip_background.png");'>
+      <image src='http://cdn.imalljoy.com/test/common/result_tip_background_adorn.png' class='background-adron' mode='widthFix'></image>
+  <view class='head-frame' style='background-image: url("http://cdn.imalljoy.com/test/common/head_frame.png");'>
+    <image src='{{currentUser.user.headImageUrl}}'></image>
+  </view>
+  <view class='head-portrait'>{{currentUser.user.name}}</view>
+  <view class='center-words' style='background-color: {{resultTipBackgroundColor}}'>{{resultTip}}</view>
+  <view class='fraction-frame' style='background-image: url("http://cdn.imalljoy.com/test/common/fraction_frame.png");'>
+    <view class='fraction'>{{score}}</view>分
+  </view>
+  <view class='test-description'>{{introduction}}</view>
+</view>
+  <button class='small-button generate-card' style='background-image: url("http://cdn.imalljoy.com/test/common/small_button.png")' bindtap='generateCard'>生成卡片</button>
+  <button class='big-button' open-type="share" style='background-image: url("http://cdn.imalljoy.com/test/common/big_button.png")'>分享测试</button>
+  <button class='small-button continue' style='background-image: url("http://cdn.imalljoy.com/test/common/small_button.png")' bindtap='continueTest'>继续测试</button>
+  <view class='group-contrast no-group' wx:if="{{showNoGroupContrast}}">
+    <image src='../images/group.png' class='group-logo'></image>
+    <text class='group-tip'>完成后分享到群里可查看群排行</text>
+  </view>
+  <view class='group-contrast' wx:if='{{showGroupContrast}}'>
+    <view class='group-rankings-wrap'>
+      <view class='group-rankings'>群排行</view>
+      <view class='group-rankings-detail'>{{rankString}}</view>
+    </view>
+    <view class='scroll-box'>
+      <scroll-view scroll-x class='user-ranking-group' scroll-with-animation='true' scroll-left='{{scrollLeft}}'>
+        <view wx:for='{{userGroup}}' wx:key='users' class='user-ranking' bindtap='checkFriend' data-item='{{item}}' scroll-x>
+          <image src='{{item.headImageUrl}}' class='user-image'></image>
+          <view class='ranking-fraction'>{{item.fraction}}分</view>
+        </view>
+      </scroll-view>
+      <image src='http://cdn.imalljoy.com/test/common/more.png' class='scroll-more' bindtap='scrollLeft'></image>
+    </view>
+  </view>
+  <view class='card-container {{showView?"show":"hide"}}'>
+    <image src='../images/QRCodeForTest.png' class='q-r-code'></image>
+    <view class='explain'>
+      <text>长按识别二维码进入</text>
+      <text>如无法进入</text>
+      <text>请在小程序上搜索</text>
+      <text class='theme-color'>微愿懂你</text>
+      <text>或者让朋友直接分享</text>
+    </view>
+  </view>
+    </swiper-item>
+  </swiper>
+  <view class='custom-toast' wx:if='{{showAlreadyVoted}}'>
+    <image class='custom-toast-image' src='../images/custom_toast_right.png'></image>
+    <text>已经选择过了</text>
+  </view>
+  <image src='../images/waiting.gif' class='waiting' wx:if='{{showWait}}'></image>
+</view>

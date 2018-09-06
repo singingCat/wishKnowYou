@@ -1,0 +1,54 @@
+.test-list-wrap {
+  padding: 0 .7408rem;
+  background-color: #fff;
+  border-bottom: 1rpx solid #e0e0e0;
+}
+.test-list {
+  position: relative;
+  height: 3.25952rem;
+  border-bottom: 1rpx solid #f1f1f1;
+}
+.test-list:last-child {
+  border-bottom: none;
+}
+.test-icon {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.6668rem;
+  height: 1.6668rem;
+  border-radius: .07408rem;
+}
+.test-wrap {
+  position: absolute;
+  left: 2.2224rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.test-name {
+  font-size: .77784rem;
+  color: #333;
+}
+.test-number {
+  font-size: .5556rem;
+  color: #ccc;
+}
+.test-detail {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: .77784rem;
+}
+.start-test {
+  position: absolute;
+  right: 1.14824rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: .77784rem;
+  color: #7b7b7b;
+}
+.not-vote {
+  color: #ff6666;
+}
